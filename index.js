@@ -44,21 +44,41 @@ client.on('message', msg => {
     let raid = raidTemplate(msg.content);
    
     let template = new Discord.RichEmbed()
-	.setColor('#0099ff')
-	.setTitle('Raid: ' + raid.title)
-	.setDescription(raid.comentario)
-	.setThumbnail(client.user.avatarURL)
-	.addField('Fecha: ', raid.fecha, true)
-	.addField('Hora: ', raid.hora + ':flag_uy:', true)
-	.addField('Luz', raid.luz, false)
-	.setTimestamp()
+    .setColor('#0099ff')
+    .setTitle('Raid: ' + raid.title)
+    .setDescription(raid.comentario)
+    .setThumbnail(client.user.avatarURL)
+    .addField('Fecha: ', raid.fecha, true)
+    .addField('Hora: ', raid.hora + ':flag_uy:', true)
+    .addField('Luz', raid.luz, false)
+    .setTimestamp()
     .setFooter(client.user.username);
     
+    //console.log(template);
+
     //client.channels.get("505098970616299541").send(raidTemplate(msg.content));
     msg.reply('Creando raid');
 
-    client.channels.get("586451986585485323").send(template);
+    client.channels.get("586451986585485323").send(template).then(msg=>{
+      msg.react('👌').then(res=>{
+        const filter = (reaction) => reaction.emoji.name === '👌';
+        const collector = msg.createReactionCollector(filter, { time: 15000 });
+        collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
+        collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+        client.on('messageReactionAdd', res => {
+
+        });
+
+        client.on('messageReactionAdd', res => {
+
+        });
+      }).catch(e => {
+      
+      });
+    });
   }
 });
+
+
 
 client.login(token);
