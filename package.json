@@ -1,0 +1,14 @@
+{
+  "name": "d2bot",
+  "version": "1.0.0",
+  "description": "D2 Clan Administrator",
+  "main": "index.js",
+  "scripts": {
+    "test": "test-d2cbot"
+  },
+  "author": "Gabkets",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1"
+  }
+}
