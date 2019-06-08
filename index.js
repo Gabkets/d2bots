@@ -35,13 +35,42 @@ const raidTemplate = (content) => {
     return template;
 }
 
-client.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
+const removerJugador = (listJugadores, removido) => {
+  return listJugadores.split(removido).join('\n');
+}
+
+const actionRemoverDeLista = (campo, cantidad, reaction, user)  => {
+    const receivedEmbed = reaction.message.embeds[0];
+    const exampleEmbed = new Discord.RichEmbed(receivedEmbed);
+    let listajugadores = removerJugador(receivedEmbed.fields[3].value, user.username);
+
+    if(listajugadores.length > 1){
+      receivedEmbed.fields[campo].value = listajugadores;
+    } else {
+      receivedEmbed.fields[campo].value = 'Esperando Guardianes';
+    }
+
+    reaction.message.edit(exampleEmbed);
+}
+const actionAgregaraLista = (campo, cantidad, reaction, user)  => {
+  const receivedEmbed = reaction.message.embeds[0];
+  const exampleEmbed = new Discord.RichEmbed(receivedEmbed);
+  if(receivedEmbed.fields[campo].value === 'Esperando Guardianes') {
+    receivedEmbed.fields[campo].value = user.username + '\n' ;
+  } else {
+    receivedEmbed.fields[campo].value = receivedEmbed.fields[3].value + '\n'  + user.username;
   }
 
-  if(msg.content.startsWith('!CreateRaid')){
-    let raid = raidTemplate(msg.content);
+  reaction.message.edit(exampleEmbed);
+}
+
+client.on('message', message => {
+  if (message.content === 'ping') {
+    message.reply('Pong!');
+  }
+
+  if(message.content.startsWith('!CreateRaid')){
+    let raid = raidTemplate(message.content);
    
     let template = new Discord.RichEmbed()
     .setColor('#0099ff')
@@ -51,34 +80,52 @@ client.on('message', msg => {
     .addField('Fecha: ', raid.fecha, true)
     .addField('Hora: ', raid.hora + ':flag_uy:', true)
     .addField('Luz', raid.luz, false)
+    .addField('Equipo: ', 'Esperando Guardianes', false)
+    .addField('Reserva: ', 'Esperando Guardianes', false)
     .setTimestamp()
     .setFooter(client.user.username);
-    
-    //console.log(template);
 
-    //client.channels.get("505098970616299541").send(raidTemplate(msg.content));
-    msg.reply('Creando raid');
+    // TODO: Arreglar coicidencias. No debería pasar teniendo el formulario creado.
+    if(raid.title.toUpperCase() === 'LEVIATAN' || raid.title.toUpperCase()  === 'LEVIATHAN') {
+      template.setImage('https://res.cloudinary.com/gabke/image/upload/v1560017762/destiny2/leviatan.jpg');
+    }
+
+    if(raid.title.toUpperCase() === 'ULTIMO DESEO' || raid.title.toUpperCase()  === 'LAST WISH' ) {
+      template.setImage('https://res.cloudinary.com/gabke/image/upload/v1560017762/destiny2/lastwish.jpg');      
+    }
+
+    message.reply('Creando raid');
 
     client.channels.get("586451986585485323").send(template).then(msg=>{
-      msg.react('👌').then(res=>{
-        const filter = (reaction) => reaction.emoji.name === '👌';
-        const collector = msg.createReactionCollector(filter, { time: 15000 });
-        collector.on('collect', r => console.log(`Collected ${r.emoji.name}`));
-        collector.on('end', collected => console.log(`Collected ${collected.size} items`));
-        client.on('messageReactionAdd', res => {
-
-        });
-
-        client.on('messageReactionAdd', res => {
-
-        });
-      }).catch(e => {
-      
-      });
+      msg.react('☑');
+      msg.react('🔁');
     });
   }
 });
 
+client.on('messageReactionAdd', (reaction, user) => {
+  console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
+  if(reaction.message.author.bot && reaction.message.author.username === 'D2RaidCreator' ) {
+    if(!user.bot && reaction.emoji.name === '🔁'){
+      actionAgregaraLista(4, 6, reaction, user);
+    }
+    if(!user.bot && reaction.emoji.name === '☑'){
+      actionAgregaraLista(3, 6, reaction, user) ;
+    }
+  }
+});
+
+client.on('messageReactionRemove', (reaction, user) => {
+  console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
+  if(reaction.message.author.bot && reaction.message.author.username === 'D2RaidCreator' ) {
+    if(!user.bot && reaction.emoji.name === '🔁'){
+      actionRemoverDeLista(4, 6, reaction, user);
+    }
+    if(!user.bot && reaction.emoji.name === '☑'){
+      actionRemoverDeLista(3, 6, reaction, user) ;
+    }
+  } 
+});
 
 
 client.login(token);
