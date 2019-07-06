@@ -18,6 +18,8 @@ const utils = {
         channel.send(template).then((msg)=>{
             msg.react('☑');
             msg.react('🔁');
+        }).catch((e)=>{
+            console.log(e);
         });
     },
     actionAgregaraLista: async (campo, cantidad, reaction, user)  => {
