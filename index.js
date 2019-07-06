@@ -11,7 +11,7 @@ client.on('ready', () => {
     bot.botActions(client);
 });
 
-app.get('/callbot', function (req, res) {
+app.get('/', function (req, res) {
     res.send('weaking up robots')
 });
 
