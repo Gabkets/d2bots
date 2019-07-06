@@ -4,12 +4,15 @@
   "description": "D2 Clan Administrator",
   "main": "index.js",
   "scripts": {
-    "test": "test-d2cbot"
+    "test": "test-d2cbot",
+    "dev": "node ."
   },
   "author": "Gabkets",
   "license": "ISC",
   "dependencies": {
+    "custom-env": "^1.0.2",
     "discord.js": "^11.5.1",
+    "express": "^4.17.1",
     "firebase": "^6.1.1",
     "websocket": "^1.0.28"
   },
