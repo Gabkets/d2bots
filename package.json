@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test-d2cbot",
-    "dev": "node ."
+    "start": "node ."
   },
   "author": "Gabkets",
   "license": "ISC",
