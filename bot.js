@@ -35,8 +35,8 @@ module.exports = {
         });
 
         bot.on('message', (message) => {
-            if(message.channel.id === config.channels.alfa && message.author.bot && message.author.username === 'D2RaidCreator' ) {
-                bot.channels.get('468753784131158016').send(`@everyone se creo una raid en <#589613917899063346>`);
+            if(message.channel.id === config.channels.production && message.author.bot && message.author.username === 'D2RaidCreator' ) {
+                bot.channels.get('468753784131158016').send(`@everyone se creo una raid en <#505098970616299541>`);
             }
         })
     }
