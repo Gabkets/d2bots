@@ -1,7 +1,7 @@
 const config = require('../config.js');
 const utils = require('./utils.js');
 const database = config.database;
-const activeChannel = config.channels.dev;
+const activeChannel = config.channels.production;
 
 module.exports = async (client) => {
     database.ref('/Raids/Agenda').on('value', snapshot => {  
