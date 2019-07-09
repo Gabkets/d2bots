@@ -25,11 +25,11 @@ module.exports = {
             //console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
             if(reaction.message.author.bot && reaction.message.author.username === 'D2RaidCreator' ) {
                 if(!user.bot && reaction.emoji.name === '🔁'){
-                    utils.actionRemoverDeLista(3, 6, reaction, user);
+                    utils.actionRemoverDeLista(3, 7, reaction, user);
                 }
 
                 if(!user.bot && reaction.emoji.name === '☑'){
-                    utils.actionRemoverDeLista(2, 6, reaction, user) ;
+                    utils.actionRemoverDeLista(2, 7, reaction, user) ;
                 }
             }
         });
