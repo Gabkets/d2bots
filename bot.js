@@ -11,12 +11,12 @@ module.exports = {
         bot.on('messageReactionAdd', (reaction, user) => {
             //console.log(`${user.username} reacted with "${reaction.emoji.name}".`);
             if(reaction.message.author.bot && reaction.message.author.username === 'D2RaidCreator' ) {
-                if(!user.bot && reaction.emoji.name === '🔁' && reaction.count < 7){
-                    utils.actionAgregaraLista(3, 6, reaction, user);
+                if(!user.bot && reaction.emoji.name === '🔁' && reaction.count < 8){
+                    utils.actionAgregaraLista(3, 7, reaction, user);
                 }
 
-                if(!user.bot && reaction.emoji.name === '☑' && reaction.count < 7){
-                    utils.actionAgregaraLista(2, 6, reaction, user) ;
+                if(!user.bot && reaction.emoji.name === '☑' && reaction.count < 8){
+                    utils.actionAgregaraLista(2, 7, reaction, user) ;
                 }
             }
         });

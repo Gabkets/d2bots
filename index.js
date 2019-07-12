@@ -10,9 +10,7 @@ const PORT = process.env.PORT || 5000;
 const utils = require('./commands/utils.js');
 
 client.login(config.discordToken);
-client.on('ready', () => {
-    bot.botActions(client);
-});
+bot.botActions(client);
 
 database.ref('/Raids/Agenda').on('value', snapshot => {  
     if(snapshot.val()){                
