@@ -9,9 +9,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const utils = require('./commands/utils.js');
 
-/*
+
 client.login(config.discordToken);
-bot.botActions(client);
+client.on('ready', ()=>{
+    bot.botActions(client);
+});
 
 database.ref('/Raids/Agenda').on('value', snapshot => {  
     if(snapshot.val()){                
@@ -21,11 +23,10 @@ database.ref('/Raids/Agenda').on('value', snapshot => {
     }
 });
 
-
 app.get('/', function (req, res) {
     res.send('weaking up robots')
 });
 
 app.listen(PORT, function () {
     console.log('Example app listening on port 5000!');
-});*/
+});

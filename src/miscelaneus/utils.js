@@ -1,27 +1,6 @@
 const Discord = require('discord.js');
 
-const utils = {
-    crearRaid: async (raid, channel, client) => {
-        let template = new Discord.RichEmbed()
-            .setColor('#f39c12')
-            .setTitle(raid.title)
-            .setDescription(raid.descripcion)
-            .setThumbnail('https://res.cloudinary.com/gabke/image/upload/c_scale,w_50/v1560103542/contorno_sin_cuervo_w3dyyn.png')
-            .addField('Fecha: ', raid.datetime, true)
-            .addField('Equipo: ', 'Esperando Guardianes', false)
-            .addField('Reserva: ', 'Esperando Guardianes', false)
-            .setImage(raid.imagen)
-            .setTimestamp()
-            .setFooter('d2RaidCreator');
-        if(!!channel){
-            channel.send(template).then((msg)=>{
-                msg.react('☑');
-                msg.react('🔁');
-            }).catch((e)=>{
-                console.log(e);
-            });
-        }            
-    },
+module.exports = {
     actionAgregaraLista: (campo, cantidad, reaction, user)  => {
         const receivedEmbed = reaction.message.embeds[0];
         const newTemplate = new Discord.RichEmbed(receivedEmbed);
@@ -53,4 +32,3 @@ const utils = {
     }
 };
 
-module.exports = utils;
