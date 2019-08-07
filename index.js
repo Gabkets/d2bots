@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 const utils = require('./commands/utils.js');
 
 
-client.login(config.discordToken);
+/*client.login(config.discordToken);
 client.on('ready', ()=>{
     bot.botActions(client);
 });
@@ -21,7 +21,7 @@ database.ref('/Raids/Agenda').on('value', snapshot => {
         this.raid = Object.values(snapshot.val())[largo];          
         utils.crearRaid(this.raid, client.channels.get(activeChannel), client);
     }
-});
+});*/
 
 app.get('/', function (req, res) {
     res.send('weaking up robots')
