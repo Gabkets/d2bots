@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const utils = require('./commands/utils.js');
 
-
+/*
 client.login(config.discordToken);
 client.on('ready', ()=>{
     bot.botActions(client);
@@ -29,4 +29,4 @@ app.get('/', function (req, res) {
 
 app.listen(PORT, function () {
     console.log('Example app listening on port 5000!');
-});
+});*/
